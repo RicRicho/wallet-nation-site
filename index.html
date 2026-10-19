@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wallet Nation — Transfer Wallet: safe Bitcoin transfers between strangers</title>
+<meta name="description" content="Transfer Wallet is a non-custodial 2-of-3 multisig Bitcoin transfer with chargeback-style protection. Try the demo or enquire about integration.">
+<link rel="icon" href="img/wallet-nation.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap row">
+    <img src="img/wallet-nation.png" alt="Wallet Nation" class="logo">
+    <nav><a href="#how">How it works</a><a href="#integrate">Integrate</a><a class="btn small" href="https://transfer-wallet-ui.onrender.com" target="_blank" rel="noopener">Try the demo</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap row">
+    <div class="copy">
+      <p class="eyebrow">Transfer Wallet by Wallet Nation</p>
+      <h1>Send Bitcoin to someone you don't know — <span>safely</span>.</h1>
+      <p class="lead">Transfer Wallet is a non-custodial, 2-of-3 multisig Bitcoin transfer with chargeback-style protection. Funds are held on-chain until both people approve. If something goes wrong, an independent reviewer can return the Bitcoin to the sender — but nobody, including us, can send it anywhere else.</p>
+      <div class="ctas">
+        <a class="btn" href="https://transfer-wallet-ui.onrender.com" target="_blank" rel="noopener">Try the demo &rarr;</a>
+        <a class="btn ghost" href="#integrate">Integration enquiry</a>
+      </div>
+      <p class="note">The demo opens in a simulated <b>Demo</b> mode (no real Bitcoin) and can also run on Bitcoin <b>Testnet</b>. Transfer Wallet is a preview: it has not yet had an independent security review, so please don't use real funds.</p>
+    </div>
+    <img src="img/shield.png" alt="" class="hero-img">
+  </div>
+</section>
+
+<section id="how" class="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="grid">
+      <div class="card"><img src="img/icon-box.png" alt=""><h3>1. Three keys, two needed</h3><p>Each transfer creates a 2-of-3 multisig address. The Sender, the Receiver and an independent Reviewer each hold one key. Any two can move the funds.</p></div>
+      <div class="card"><img src="img/icon-box-2.png" alt=""><h3>2. Held until both approve</h3><p>The Sender funds the address. The Bitcoin sits on-chain — not in our account — until Sender and Receiver both sign the release.</p></div>
+      <div class="card"><img src="img/icon-box-3.png" alt=""><h3>3. Protection if it goes wrong</h3><p>If there's a dispute, the Reviewer can co-sign either release to the Receiver or a return to the Sender. Settlement destinations are locked, so the Reviewer can never redirect funds.</p></div>
+    </div>
+    <ul class="facts">
+      <li><b>Non-custodial:</b> no single party — including Wallet Nation — can move funds alone.</li>
+      <li><b>Chargeback-style protection</b> for Bitcoin, which normally has no way to reverse a payment.</li>
+      <li><b>Plain-language flow:</b> invite by email, fund, approve.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="integrate" class="integrate">
+  <div class="wrap row">
+    <div class="copy">
+      <h2>Integrate Transfer Wallet</h2>
+      <p>We're talking to <b>stablecoin issuers, wallet providers and exchanges</b> who want protected peer-to-peer transfers for their users — marketplace sales, OTC trades, first-time payments between strangers.</p>
+      <p>Tell us a little about your platform and we'll come back to you with an integration pack.</p>
+      <img src="img/people-waving-cyan.png" alt="" class="side-img">
+    </div>
+    <form id="enquiry" class="form" action="https://formsubmit.co/ric@ricricho.com" method="POST">
+      <input type="hidden" name="_subject" value="Wallet Nation integration enquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+      <label>Name<input name="name" required></label>
+      <label>Work email<input type="email" name="email" required></label>
+      <label>Company<input name="company" required></label>
+      <label>Type of business
+        <select name="business_type" required>
+          <option value="">Choose one…</option>
+          <option>Stablecoin issuer</option>
+          <option>Wallet provider</option>
+          <option>Exchange</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>What would you like to do with Transfer Wallet?<textarea name="message" rows="4" required></textarea></label>
+      <button class="btn" type="submit">Send enquiry</button>
+      <p id="status" class="status" role="status"></p>
+      <p class="fallback">Form not working? Email <a id="mailto" href="mailto:ric@ricricho.com?subject=Wallet%20Nation%20integration%20enquiry">ric@ricricho.com</a>.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <img src="img/wallet-nation-white.png" alt="Wallet Nation" class="logo">
+    <p>&copy; 2026 Wallet Nation. Transfer Wallet is a technology preview.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var f=document.getElementById('enquiry'),s=document.getElementById('status');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f._honey.value){return;}
+    s.textContent='Sending…';
+    var data=new FormData(f);
+    fetch('https://formsubmit.co/ajax/ric@ricricho.com',{method:'POST',headers:{'Accept':'application/json'},body:data})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(String(j.success)==='true'){s.textContent='Thanks — your enquiry has been sent. We\'ll be in touch.';f.reset();}
+        else{throw new Error(j.message||'failed');}
+      })
+      .catch(function(){
+        var body='Name: '+data.get('name')+'\nEmail: '+data.get('email')+'\nCompany: '+data.get('company')+'\nType: '+data.get('business_type')+'\n\n'+data.get('message');
+        s.innerHTML='We couldn\'t send that automatically. <a href="mailto:ric@ricricho.com?subject='+encodeURIComponent('Wallet Nation integration enquiry')+'&body='+encodeURIComponent(body)+'">Click here to email it instead</a>.';
+      });
+  });
+})();
+</script>
+</body>
+</html>
